@@ -1,0 +1,49 @@
+{
+  "name": "derive-railgun-keys",
+  "version": "0.1.1",
+  "description": "typescript tool for railgun key derivation",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kassandraoftroy/derive-railgun-keys.git"
+  },
+  "author": "kassandra.eth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kassandraoftroy/derive-railgun-keys/issues"
+  },
+  "homepage": "https://github.com/kassandraoftroy/derive-railgun-keys#readme",
+  "dependencies": {
+    "@kohaku-eth/plugins": "0.0.1-alpha.7",
+    "@kohaku-eth/railgun": "0.0.1-alpha.10",
+    "ethereum-cryptography": "^3.2.0",
+    "ethers": "^6.13.1",
+    "ox": "^0.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
