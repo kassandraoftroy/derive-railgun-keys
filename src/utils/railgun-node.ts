@@ -21,15 +21,19 @@ export const getRailgunPathsByIndex = (index: number = 0): RailgunKeys => {
   };
 };
 
-export const deriveRailgunKey = (mnemonic: string, path: string): string => {
-  return RailgunNode.fromMnemonic(mnemonic).derive(path).chainKey;
+export const deriveRailgunKey = (mnemonic: string, path: string, password: string = ''): string => {
+  return RailgunNode.fromMnemonic(mnemonic, password).derive(path).chainKey;
 };
 
-export const deriveRailgunKeysByIndex = (mnemonic: string, index: number): RailgunKeys => {
+export const deriveRailgunKeysByIndex = (
+  mnemonic: string,
+  index: number,
+  password: string = '',
+): RailgunKeys => {
   const paths = getRailgunPathsByIndex(index);
   return {
-    spending: deriveRailgunKey(mnemonic, paths.spending),
-    viewing: deriveRailgunKey(mnemonic, paths.viewing),
+    spending: deriveRailgunKey(mnemonic, paths.spending, password),
+    viewing: deriveRailgunKey(mnemonic, paths.viewing, password),
   };
 };
 
@@ -47,8 +51,8 @@ export class RailgunNode {
    * Create BIP32 node from mnemonic
    * @returns {RailgunNode}
    */
-  static fromMnemonic(mnemonic: string): RailgunNode {
-    const seed = Mnemonic.toSeed(mnemonic);
+  static fromMnemonic(mnemonic: string, password: string = ''): RailgunNode {
+    const seed = Mnemonic.toSeed(mnemonic, password);
     return new RailgunNode(getMasterKeyFromSeed(seed));
   }
 
